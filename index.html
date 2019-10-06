@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1">
+    
+    <title>MyApp</title>
+    <link rel="manifest" href="manifest.webapp" type="application/x-web-app-manifest+json">
+
+    <link rel="stylesheet" href="ui/main.css" type="text/css" />
+    <link rel="stylesheet" href="ui/landscape.css" type="text/css" />
+
+    <script src="code/app.js" defer></script>
+    <script src="code/KaiOS.js" defer></script>
+    <script src="code/someList.js" defer></script>
+    <script src="code/someGrid.js" defer></script>
+    <script src="code/someInputs.js" defer></script>
+    <!-- get KaiAds SDK from here: https://www.kaiads.com/publishers/sdk.html -->
+    <script src="code/kaiads.min.js" defer></script>
+  </head>
+
+  <body>
+    <div id="views">
+      <div class="view" id="viewMenu">
+        <h1>MyApp</h1>
+        <button class="navItem" tabIndex="0" data-gotToViewId="1">List</button>
+        <button class="navItem" tabIndex="10" data-gotToViewName="viewGrid">Grid</button>
+        <button class="navItem" tabIndex="20" data-gotToViewName="viewInputs">Inputs</button>
+        <button class="navItem" tabIndex="30" data-href="http://www.ays-arts.de">Open URL</button>
+        <button class="navItem" tabIndex="40" data-function="quit">Quit</button>
+        <div id="ad-container"></div>
+      </div>
+      <div class="view" id="viewList">
+        <h1>List</h1>
+        <div id="generatedList" class="list"></div>
+      </div>
+      <div class="view" id="viewGrid">
+        <h1>Grid</h1>
+        <div id="generatedGrid" class="grid"></div>
+      </div>
+      <div class="view" id="viewInputs">
+        <h1>Inputs</h1>
+        <fieldset>
+          <legend class="navItem" tabIndex="0">Select 1</legend>
+          <select id="select1">
+            <option value="1" selected>Option 1</option>
+            <option value="2">Option 2</option>
+            <option value="3">Option 3</option>
+          </select>
+        </fieldset>
+        <fieldset>
+          <legend class="navItem" tabIndex="10">Select 2</legend>
+          <select id="select2">
+            <option value="1" selected>Option 1</option>
+            <option value="2">Option 2</option>
+            <option value="3">Option 3</option>
+          </select>
+        </fieldset>
+        <fieldset>
+          <legend class="navItem" tabIndex="20">Input 1</legend>
+          <input id="input1" value="text" />
+        </fieldset>
+      </div>
+    </div>
+
+    <div id="softkeyBar">
+      <button id="bar-back"></button>
+      <button id="bar-action"></button>
+      <button id="bar-options"></button>
+    </div>
+  </body>
+
+</html>

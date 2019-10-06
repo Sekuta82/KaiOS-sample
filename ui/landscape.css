@@ -1,0 +1,60 @@
+/* KaiOS landscape devices (320x240) */
+@media screen and (orientation : landscape) {
+  body {
+    font-size: 7.5vw;
+  }
+
+  h2 {
+    height: 1.25em;
+  }
+
+  .landscapeHide {
+    display: none;
+  }
+
+  x-layout table tr, 
+  x-layout table th, 
+  x-layout table td {
+    height: 1.0em;
+  }
+
+  x-deck {
+    height: 86%;
+  }
+
+  x-appbar {
+    height: 14%;	
+  }
+
+  #mainMenu x-button {
+    font-size: 0.6em;
+  }
+
+  #viewCalculate x-layout section .specGroup {
+    width: 72%;
+  }
+
+  #viewCalculate x-layout > section h2 {
+    text-align: left;
+    padding-top: 0;
+    float: left;
+    width: 50%;
+  }
+
+  #viewSettings x-layout > section div {
+    width: 28%;
+  }
+
+  #viewSettings x-layout > section h2 {
+    width: 44%;
+    float: left;
+    text-align: left;
+  }
+
+  #viewSettings x-layout > section h3 {
+    text-align: left;
+  }
+  #viewEdit section h2 {
+    display: none;
+  }
+}

@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+* {
+  outline: 0 ! important;
+}
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  color: white;
+  background-color: darkslategray;
+  font-family: 'Open Sans', sans-serif;
+  font-style: normal;
+  overflow: hidden;
+  font-size: 1em;
+}
+
+h1 {
+  margin: 0;
+  line-height: 2em;
+}
+
+button {
+  background: black;
+  font-size: 1.0em;
+  text-align: center;
+  border: none;
+}
+button::-moz-focus-inner{border:0;padding:0}
+
+.navItem {
+  display: block;
+  float: left;
+  color: #323232;
+  background-color: white;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 100%;
+  margin: 0 0 3% 0;
+}
+
+#softkeyBar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 10%;	
+  line-height: 150%;
+  background-color: black;
+}
+#softkeyBar button {
+  color: white;
+  background-color: black;
+  font-size: 1.0em;
+  width: 32%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+#views {
+  height: 90%;
+}
+
+.view {
+  overflow: -moz-hidden-unscrollable;  
+  overflow: hidden;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 3%;
+  height: 100%;
+}
+
+.view * {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.view {
+  display: none;
+}
+.view.active {
+  display: block;
+}
+
+.view select, 
+.view input  {
+  width: 100%;
+  font-size: 1em;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 0;
+  background-color: #CCCCCC;
+  color: #323232;
+  height: 1.4em;
+}
+
+.view select:focus, 
+.view input:focus,
+.navItem:focus {
+  background-color: purple;
+  border-color: purple;
+  color: white;
+}
+
+.list div,
+.grid div {
+  padding: 2%;
+}
+
+.list div h3,
+.grid div h3 {
+  line-height: 2em;
+  margin: 0;
+}
+
+.grid div {
+  margin: 0;
+  border: 1px solid darkslategray;
+}
+
+fieldset {
+  border: none;
+  margin: 0;
+  padding: 0 0 1em 0;
+}
+
+#ad-container {
+  float: left;
+}
+#ad-container > div {
+  outline: none;
+}
+#ad-container > div:focus {
+  outline: solid 0.2em purple ! important;
+}
+
+.hidden {
+  display: none !important;
+}

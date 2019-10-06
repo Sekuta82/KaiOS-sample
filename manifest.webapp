@@ -1,0 +1,28 @@
+{
+  "name": "MyApp",
+   "version": "0.0.1",
+  "description": "Sample app",
+  "subtitle": "Sample app",
+  "launch_path": "/index.html",
+  "origin": "app://MyApp",
+  "icons": {
+    "56": "/icons/MyApp_56.png",
+    "112": "/icons/MyApp_112.png"
+  },
+  "theme_color": "#65ACFF",
+  "developer": {
+    "name": "John Doe",
+    "url": "http://www.MyWebsite.me"
+  },
+  "type": "web",
+  "fullscreen": "true",
+  "locales": {
+    "en-US": {
+      "name": "MyApp",
+      "description": "Sample app",
+      "subtitle": "Sample app"
+    }
+  },
+  "default_locale": "en-US",
+  "orientation": [ "portrait-primary" ]
+}
