@@ -21,5 +21,7 @@ Simply download the SDK and move the js-file into the code directory.
 You will find lots of useful resources here, regarding specific KaiOS requirements and general Firefox OS development (which KaiOS is based on):
 
 https://developer.kaiostech.com/
+
 https://developer.mozilla.org/en-US/docs/Archive/B2G_OS/Introduction
+
 https://sites.google.com/view/bananahackers/development
