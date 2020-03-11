@@ -7,37 +7,37 @@ var MODULE = (function () {
   app.currentView = null;
   app.currentViewID = 0;
   app.currentViewName = '';
-  app.prevViewId = 0;    
+  app.prevViewId = 0;
   app.currentNavId = 0;
   app.navItems = new Array();
-  
+
   app.backEnabled = false;
   app.optionEnabled = false;
   app.fullAdVisible = false;
 
   app.optionButtonAction = '';
-  
+
   app.backButton = document.getElementById("bar-back");
   app.actionButton = document.getElementById("bar-action");
   app.optionsButton = document.getElementById("bar-options");
 
   // button input
   app.keyCallback = {
-    dUp: function() { navVertical(false); },
-    dDown: function() { navVertical(true); },
-    dLeft: function() { navHorizontal(false); },
-    dRight: function() { navHorizontal(true); },
-    softLeft: function() { goBack(); },
-    softRight: function() { executeOption(); },
-    enter: function() { execute(); },
-    menu: function() { },
-    back: function() { goBack(); },
-    quit: function() { },
-    other: function() { }
+    dUp: function () { navVertical(false); },
+    dDown: function () { navVertical(true); },
+    dLeft: function () { navHorizontal(false); },
+    dRight: function () { navHorizontal(true); },
+    softLeft: function () { goBack(); },
+    softRight: function () { executeOption(); },
+    enter: function () { execute(); },
+    menu: function () { },
+    back: function () { goBack(); },
+    quit: function () { },
+    other: function () { }
   };
 
   // startup
-  window.addEventListener("load", function() {
+  window.addEventListener("load", function () {
     var viewRoot = document.getElementById("views");
     app.views = viewRoot.querySelectorAll('.view');
     // load first view
@@ -46,27 +46,27 @@ var MODULE = (function () {
   });
 
   // vertical navigation in increments of 10
-  function navVertical (forward) {
+  function navVertical(forward) {
     if (!app.isInputFocused() && !app.fullAdVisible) {
       app.updateNavItems();
       // jump to tabIndex
       var next = app.currentNavId;
       next += forward ? 10 : -10;
-      if(next > getNavTabIndex(app.navItems.length-1)) {
+      if (next > getNavTabIndex(app.navItems.length - 1)) {
         // if larger than last index
-        next = next%10;
+        next = next % 10;
         // try to stay in same column
-        if(app.navItems[next]) {
+        if (app.navItems[next]) {
           focusActiveButton(app.navItems[next]);
         } else {
           focusActiveButton(app.navItems[0]);
         }
       } else if (next < 0) {
         // if smaller than 0
-        var lastTab = getNavTabIndex(app.navItems.length-1);
+        var lastTab = getNavTabIndex(app.navItems.length - 1);
         var rowIndex = parseInt(Math.floor(lastTab * 0.1) * 10);
         // try to stay in same column
-        var columnIndex = (next+10)%10;
+        var columnIndex = (next + 10) % 10;
         next = rowIndex + columnIndex;
         for (var i = 0; i < app.navItems.length; i++) {
           if (getNavTabIndex(i) == next) {
@@ -85,7 +85,7 @@ var MODULE = (function () {
         }
         if (!found) {
           // nothing found, try start of next row
-          var round = Math.floor(next/10) * 10;
+          var round = Math.floor(next / 10) * 10;
           for (var i = 0; i < app.navItems.length; i++) {
             if (getNavTabIndex(i) == round) {
               focusActiveButton(app.navItems[i]);
@@ -99,7 +99,7 @@ var MODULE = (function () {
   };
 
   // horizontal navigation in increments of 1
-  function navHorizontal (forward) {
+  function navHorizontal(forward) {
     if (!app.isInputFocused() && !app.fullAdVisible) {
       app.updateNavItems();
       // jump to array index for continuous horizontal navigation
@@ -119,23 +119,23 @@ var MODULE = (function () {
       }
     }
   };
-  
-  function getNavTabIndex (i) {
+
+  function getNavTabIndex(i) {
     return parseInt(app.navItems[i].getAttribute('tabIndex'));
   };
-  
-  function focusActiveButton (element) {
+
+  function focusActiveButton(element) {
     app.activeNavItem = element;
     app.currentNavId = parseInt(app.activeNavItem.getAttribute('tabIndex'));
 
     // scroll to top
     if (app.currentNavId == 0) {
-      try { 
-        app.currentView.scrollTo(0,0); 
+      try {
+        app.currentView.scrollTo(0, 0);
       } catch (e) { }
     } else {
       // smooth scrolling into view
-      app.activeNavItem.scrollIntoView({behavior: "smooth"});
+      app.activeNavItem.scrollIntoView({ behavior: "smooth" });
     }
 
     app.activeNavItem.focus();
@@ -144,16 +144,16 @@ var MODULE = (function () {
   };
 
   app.getActiveNavItemIndex = function () {
-    for (var i=0; i < app.navItems.length; i++) {
+    for (var i = 0; i < app.navItems.length; i++) {
       var found = false;
-      if(app.activeNavItem) {
-        if(app.activeNavItem.getAttribute('id') == app.navItems[i].getAttribute('id')) {
-        found = true;
-        break;
+      if (app.activeNavItem) {
+        if (app.activeNavItem.getAttribute('id') == app.navItems[i].getAttribute('id')) {
+          found = true;
+          break;
         }
       }
     }
-    if(found) {
+    if (found) {
       return i;
     } else {
       return 0;
@@ -161,8 +161,8 @@ var MODULE = (function () {
   }
 
   // decide, what the enter button does, based on the active element
-  function execute () {
-    if(!app.fullAdVisible) {
+  function execute() {
+    if (!app.fullAdVisible) {
       if (!app.isInputFocused()) { /* NOT in some input field */
         if (app.activeNavItem.getAttribute('data-gotToViewId')) {
           showView(app.activeNavItem.getAttribute('data-gotToViewId'));
@@ -176,7 +176,7 @@ var MODULE = (function () {
           var call = app.activeNavItem.getAttribute('data-function');
           switch (call) {
             case 'mailto':
-              location.href = 'mailto:'+app.activeNavItem.innerHTML;
+              location.href = 'mailto:' + app.activeNavItem.innerHTML;
               break;
             case 'quit':
               window.close();
@@ -193,7 +193,7 @@ var MODULE = (function () {
           console.log('nothing to execute');
         }
       } else { /* in some input field */
-        if(app.currentViewName == 'viewInputs') { /* do this in the inputs view */
+        if (app.currentViewName == 'viewInputs') { /* do this in the inputs view */
           app.updateInputs();
         }
         // return to legend when input confirmed to avoid triggering the input again
@@ -204,7 +204,7 @@ var MODULE = (function () {
     }
   };
 
-  function goBack () {
+  function goBack() {
     if (!app.isInputFocused() && !app.fullAdVisible && app.backEnabled) {
       showView(app.prevViewId);
       initView();
@@ -212,8 +212,8 @@ var MODULE = (function () {
   };
 
   // decide, what the 'soft key right' does
-  function executeOption () {
-    if(!app.fullAdVisible) {
+  function executeOption() {
+    if (!app.fullAdVisible) {
       if (app.optionButtonAction == 'clear') { /* clear input */
         if (app.activeNavItem.tagName.toLowerCase() == 'legend') { /* clear sibling if focused element is a legend */
           app.activeNavItem.nextElementSibling.value = '';
@@ -231,14 +231,14 @@ var MODULE = (function () {
     var isInput = false;
     // the focus switches to the 'body' element for system ui overlays
     if (activeTag == 'input' || activeTag == 'select' || activeTag == 'text' || activeTag == 'textarea' || activeTag == 'body' || activeTag == 'html') {
-     isInput = true;
-    } 
+      isInput = true;
+    }
     return isInput;
   };
 
   // use the index to navigate to the view
-  function showView (index) {
-    app.prevViewId = app.currentViewID;  
+  function showView(index) {
+    app.prevViewId = app.currentViewID;
     // switch active view
     for (let i = 0; i < app.views.length; i++) {
       app.views[i].classList.remove('active');
@@ -250,8 +250,8 @@ var MODULE = (function () {
   }
 
   // use the view's name
-  function showViewByName (name) {
-    app.prevViewId = app.currentViewID;  
+  function showViewByName(name) {
+    app.prevViewId = app.currentViewID;
     var viewIndex = 0;
     // switch active view
     for (let i = 0; i < app.views.length; i++) {
@@ -267,17 +267,17 @@ var MODULE = (function () {
     app.currentViewName = name;
   }
 
-  function openURL (url) {
-      var external = url.includes('http');
-      if(external) {
-          window.open(url, '_blank');
-      } else {
-          window.location.assign(url);
-      }
+  function openURL(url) {
+    var external = url.includes('http');
+    if (external) {
+      window.open(url, '_blank');
+    } else {
+      window.location.assign(url);
+    }
   }
 
-  function initView () {
-    app.currentView.scrollTo(0,0); 
+  function initView() {
+    app.currentView.scrollTo(0, 0);
     // enable options button
     // enable back button
     if (app.currentViewName != 'viewMenu') {
@@ -287,9 +287,9 @@ var MODULE = (function () {
       app.backEnabled = false;
       app.optionEnabled = false;
     }
-    
+
     // focus first menu entry
-    if(app.currentView.querySelector(".navItem")) {
+    if (app.currentView.querySelector(".navItem")) {
       app.updateNavItems();
       focusActiveButton(app.navItems[0]);
     }
@@ -301,14 +301,14 @@ var MODULE = (function () {
   }
 
   // set soft keys
-  function softkeyBar () {
+  function softkeyBar() {
     if (app.backEnabled) {
       app.backButton.innerHTML = "Back";
     } else {
       app.backButton.innerHTML = "";
     }
     app.actionButton.innerHTML = "SELECT";
-    if(app.isInputFocused()) {
+    if (app.isInputFocused()) {
       app.optionsButton.innerHTML = "Clear";
       app.optionButtonAction = 'clear';
     } else if (app.optionEnabled) {
@@ -319,7 +319,7 @@ var MODULE = (function () {
       app.optionButtonAction = '';
     }
   };
-  
+
   return app;
 }());
 
