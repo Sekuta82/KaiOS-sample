@@ -3,20 +3,20 @@
 	document.addEventListener('keydown', handleKeydown);
 	document.addEventListener('keyup', handleKeyup);
 
-	var keyOverly = document.getElementById('keyOverlay');
-	var overlayTimer;
+	var keyOverlay = document.getElementById('keyOverlay');
+	var overlayTimeout;
 
 	function handleKeydown(e) {
 		// enable key overlay
-		keyOverly.style.display = 'block';
-		keyOverly.innerHTML += '<span>' + e.key + '</span>';
+		keyOverlay.style.display = 'block';
+		keyOverlay.innerHTML += '<span>' + e.key + '</span>';
 		console.log('Button pressed:', e.key);
 
 		// clear overlay
-		clearTimeout(overlayTimer);
-		overlayTimer = setTimeout(function () {
-			keyOverly.innerHTML = ' ';
-			keyOverly.style.display = 'none';
+		clearTimeout(overlayTimeout);
+		overlayTimeout = setTimeout(function () {
+			keyOverlay.innerHTML = ' ';
+			keyOverlay.style.display = 'none';
 		}, 1000);
 
 		switch (e.key) {
